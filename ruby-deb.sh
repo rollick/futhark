@@ -15,22 +15,16 @@ cd ruby*
 
 rm -rf /tmp/ruby20
 
-./configure --prefix=/usr && make && make install DESTDIR=/tmp/ruby20
+./configure --prefix=/usr --with-iconv-dir=/usr/local && make && make install DESTDIR=/tmp/ruby20
 
   
 /var/lib/gems/1.8/bin/fpm -s dir -t deb -n ruby20 -v 2.0 --description \
-"Ruby 2.0 stable package" -C /tmp/ruby20 \
-
+  "Ruby 2.0 stable package" -C /tmp/ruby20 \
   -p ruby2.0-VERSION_ARCH.deb -d "libstdc++6 (>= 4.4.3)" \
-
   -d "libc6 (>= 2.6)" -d "libffi5 (>= 3.0.4)" -d "libgdbm3 (>= 1.8.3)" \
-
   -d "libncurses5 (>= 5.7)" -d "libreadline6 (>= 6.1)" \
-
   -d "libssl0.9.8 (>= 0.9.8)" -d "zlib1g (>= 1:1.2.2)" \
-
   -d "libyaml-0-2 (>= 0.1.3)" \
-
   usr/bin usr/lib usr/share/man usr/include
 
   
@@ -38,7 +32,7 @@ rm -rf /tmp/ruby20
 
 apt-get remove ruby rubygems
 
-apt-get install libffi5 libyaml-0-2
+apt-get install libffi-dev libyaml-0-2
 
 dpkg -i ruby2*.deb
 
